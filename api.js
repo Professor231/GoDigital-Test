@@ -1,11 +1,19 @@
-const contentful = require("contentful");
+const blogContainer = document.getElementById("blog-posts");
 
-const client = contentful.createClient({
-  space: "0jzoq94u7hbn",
-  accessToken: "H7ev4BkOk-uQ9a6FVvCETjXEKBPoBHeJkD7T26vnLMA",
-});
+client.getEntries()
+    .then((response) => {
+        response.items.forEach((item) => {
+            const title = item.fields.title;
+            const body = item.fields.body; // Assuming it's plain text
 
-client
-  .getEntries()
-  .then((response) => console.log(response.items))
-  .catch((error) => console.error(error));
+            const postElement = document.createElement("div");
+            postElement.classList.add("blog-post");
+            postElement.innerHTML = `
+                <h2>${title}</h2>
+                <p>${body}</p>
+            `;
+
+            blogContainer.appendChild(postElement);
+        });
+    })
+    .catch((error) => console.error("Error fetching content:", error));
