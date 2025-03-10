@@ -1,4 +1,4 @@
-const blogContainer = document.getElementById("blog-posts");
+const blogContainer = document.getElementById("blogPosts");
 
 client.getEntries()
     .then((response) => {
@@ -7,7 +7,7 @@ client.getEntries()
             const body = item.fields.body; // Assuming it's plain text
 
             const postElement = document.createElement("div");
-            postElement.classList.add("blog-post");
+            postElement.classList.add("blogPost");
             postElement.innerHTML = `
                 <h2>${title}</h2>
                 <p>${body}</p>
